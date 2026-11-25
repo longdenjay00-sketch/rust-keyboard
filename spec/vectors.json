@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "cases": [
+    {"name": "type_hello", "inputs": ["h", "e", "l", "l", "o"], "actions": ["commit:h", "commit:e", "commit:l", "commit:l", "commit:o"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "shift_once_capitalises_one_char", "inputs": ["SHIFT", "h", "i"], "actions": ["commit:H", "commit:i"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "caps_lock_then_off", "inputs": ["SHIFT", "SHIFT", "h", "i", "SHIFT", "x"], "actions": ["commit:H", "commit:I", "commit:x"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "shift_punctuation", "inputs": ["SHIFT", "'", "SHIFT", ";", "SHIFT", "-", "SHIFT", ","], "actions": ["commit:\"", "commit::", "commit:_", "commit:<"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "space_backspace_enter_tab", "inputs": ["a", "SPACE", "b", "BKSP", "ENTER", "SYM", "TAB"], "actions": ["commit:a", "commit: ", "commit:b", "delete_back", "enter", "layer:sym", "tab"], "final": {"mode": "insert", "layer": "sym", "shift": "off"}},
+    {"name": "symbol_layer_roundtrip", "inputs": ["SYM", "1", "{", "|", "ABC", "x"], "actions": ["layer:sym", "commit:1", "commit:{", "commit:|", "layer:alpha", "commit:x"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "shift_on_symbol_layer", "inputs": ["SYM", "SHIFT", "1", "2"], "actions": ["layer:sym", "commit:!", "commit:2"], "final": {"mode": "insert", "layer": "sym", "shift": "off"}},
+    {"name": "redundant_layer_switch_is_silent", "inputs": ["ABC", "SYM", "SYM"], "actions": ["layer:sym"], "final": {"mode": "insert", "layer": "sym", "shift": "off"}},
+    {"name": "esc_passes_through_and_keeps_mode", "inputs": ["ESC", "a", "NAV", "ESC"], "actions": ["escape", "commit:a", "mode:normal", "escape"], "final": {"mode": "normal", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_hjkl", "inputs": ["NAV", "h", "j", "k", "l"], "actions": ["mode:normal", "left", "down", "up", "right"], "final": {"mode": "normal", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_word_and_line", "inputs": ["NAV", "w", "e", "b", "SYM", "0", "^", "$", "ABC"], "actions": ["mode:normal", "word_fwd", "word_fwd", "word_back", "layer:sym", "line_start", "line_start", "line_end", "layer:alpha"], "final": {"mode": "normal", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_edit", "inputs": ["NAV", "x", "SHIFT", "x", "u", "BKSP"], "actions": ["mode:normal", "delete_fwd", "delete_back", "undo", "delete_back"], "final": {"mode": "normal", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_insert_variants", "inputs": ["NAV", "i", "NAV", "a", "NAV", "SHIFT", "a", "NAV", "SHIFT", "i"], "actions": ["mode:normal", "mode:insert", "mode:normal", "right", "mode:insert", "mode:normal", "line_end", "mode:insert", "mode:normal", "line_start", "mode:insert"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_open_lines", "inputs": ["NAV", "o", "NAV", "SHIFT", "o"], "actions": ["mode:normal", "line_end", "enter", "mode:insert", "mode:normal", "line_start", "enter", "up", "mode:insert"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_space_and_enter", "inputs": ["NAV", "SPACE", "ENTER"], "actions": ["mode:normal", "right", "enter"], "final": {"mode": "normal", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_unknown_keys_ignored", "inputs": ["NAV", "q", "z", ";"], "actions": ["mode:normal"], "final": {"mode": "normal", "layer": "alpha", "shift": "off"}},
+    {"name": "nav_toggle_back_types_again", "inputs": ["NAV", "NAV", "q"], "actions": ["mode:normal", "mode:insert", "commit:q"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}},
+    {"name": "caps_lock_persists_into_nav", "inputs": ["SHIFT", "SHIFT", "NAV", "a", "x"], "actions": ["mode:normal", "line_end", "mode:insert", "commit:X"], "final": {"mode": "insert", "layer": "alpha", "shift": "locked"}},
+    {"name": "nav_operator_pending_dd_dw_cw", "inputs": ["NAV", "d", "d", "d", "w", "c", "w", "x"], "actions": ["mode:normal", "delete_line", "delete_word", "delete_word", "mode:insert", "commit:x"], "final": {"mode": "insert", "layer": "alpha", "shift": "off"}}
+  ]
+}

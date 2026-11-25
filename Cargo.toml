@@ -1,0 +1,25 @@
+[package]
+name = "rust-keyboard"
+version = "0.2.0"
+edition = "2021"
+authors = ["Alex (Epic) <longdenjay00@gmail.com>"]
+description = "Tactical Rust keyboard engine: Dvorak/Programmer-Dvorak/QWERTY modal TUI, Linux evdev/uinput keymapper, and Android IME JNI bridge"
+license = "MIT"
+
+[lib]
+name = "rust_keyboard"
+path = "src/lib.rs"
+crate-type = ["rlib", "cdylib"]
+
+[[bin]]
+name = "rust-keyboard"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+# Zero external crate dependencies: fast native builds, offline auditability, and clean aarch64 cross-compilation.
+[dependencies]
