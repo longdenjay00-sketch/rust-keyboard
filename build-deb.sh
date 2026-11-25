@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 PKG_NAME="rust-keyboard"
-PKG_VER="0.2.0"
+PKG_VER="$(awk -F'"' '/^version *=/ {print $2; exit}' Cargo.toml)"
 ARCH="$(dpkg --print-architecture 2>/dev/null || echo arm64)"
 STAGE_DIR="dist/${PKG_NAME}_${PKG_VER}_${ARCH}"
 
